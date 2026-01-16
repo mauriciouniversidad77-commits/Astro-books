@@ -1,6 +1,7 @@
 ---
 
 import { getCollection,render} from "astro:content";
+import { SHOW_BUY_BUTTON } from "astro:env/server";
 import Layout from "../../layouts/Layout.astro";
 import { date } from "astro:schema";
 
@@ -15,7 +16,7 @@ import { date } from "astro:schema";
  }
 
 const {book} = Astro.props
-const {data}=book
+const {data, slug }=book
 const{title,author,img,readtime,description,buy}=data
 const{Content} = await render(book)
 ---
@@ -23,7 +24,10 @@ const{Content} = await render(book)
 <Layout title={`${title}`}>
     <div class="flex gap-12">
     <aside class="flex flex-col items-center gap-4">
-        <img class="rounded w-72 h-auto"src={`/img/${img}`} alt={title} >
+
+        <a href="/" class="hover:underline opacity-70"> Volver atras</a>
+        <img
+    transition:name= {`img-${slug}`}class="rounded w-72 h-auto"src={`/img/${img}`} alt={title} >
     </aside>
     <main>
 <h1 class="text-4xl font-bold mb-4">{title}</h1>
